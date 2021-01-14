@@ -1,0 +1,14 @@
+{
+  "name": "pwa_service",
+  "version": "1.0.0",
+  "main": "app/server.js",
+  "repository": "https://github.com/skandla2002/pwa_service.git",
+  "author": "Andy Pak <skandla2002@gmail.com>",
+  "scripts": {
+    "start": "node app/server.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
