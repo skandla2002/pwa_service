@@ -22,15 +22,6 @@ self.addEventListener('install', function(event){
 });
 
 
-self.addEventListener('fetch', function(event){
-    console.log('fetch .....');
-    event.respondWith(
-        caches.match(event.request)
-        .then(function(response){
-            return response || fetchAndCache(event.request);
-        })
-    )
-});
 
 // helper functions ----------
 
@@ -69,12 +60,12 @@ function logResult(result) {
     imgElem.src = imgUrl;
   }
   
-  function showText(responseAsText) {
+  function showText (responseAsText) {
     const message = document.getElementById('message');
     message.textContent = responseAsText;
   }
   
-  function logSize(response) {
+  function logSize (response) {
     const url = response.url;
     const size = response.headers.get('content-length');
     console.log(`${url} is ${size} bytes`);
@@ -82,18 +73,29 @@ function logResult(result) {
   
   
   // Fetch JSON ----------
-  
-  function fetchJSON() {
+
+self.addEventListener('fetch', function(event){
+    console.log('fetch .....');
+    event.respondWith(
+        caches.match(event.request)
+        .then(function(response){
+            return response || fetchAndCache(event.request);
+        })
+    )
+});
+
+
+function fetchJSON() {
     fetch('examples/animals.json')
-      .then(validateResponse)
-      .then(readResponseAsJSON)
-      .then(logResult)
-      .catch(logError);
-  }
-  console.log(document);
-  const jsonButton = document.getElementById('json-btn');
-  console.log('jsonButton', jsonButton);
-  jsonButton.addEventListener('click', fetchJSON);
+        .then(validateResponse)
+        .then(readResponseAsJSON)
+        .then(logResult)
+        .catch(logError);
+}
+console.log(document);
+const jsonButton = document.getElementById('json-btn');
+console.log('jsonButton', jsonButton);
+jsonButton.addEventListener('click', fetchJSON);
 
 function fetchAndCache(url){
     return fetch(url)
@@ -114,12 +116,11 @@ function fetchAndCache(url){
 
 
 
-
 // ServiceWorkerRegistration.active 신규 등록시
 self.addEventListener('activate', event => {
     console.log('Activating new service worker...');
   
-    const cacheWhitelist = [staticCacheName];
+    const cacheWhitelist = [urlsToCache];
   
     event.waitUntil(
         caches.keys().then(cacheNames => {
