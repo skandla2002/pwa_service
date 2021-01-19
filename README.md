@@ -1,6 +1,10 @@
 # PWA 프로젝트를 생성해 본다.
 참조: https://developers.google.com/web/ilt/pwa/
 
+0. 준비: eslint 설치(VS code에는 'Prettier ESLint' 설치)
+yarn add -D eslint
+npx eslint --init
+
 1. Offline app
 
 2. Fetch API: https로 serviceWorker 호출함(로컬은 http로 가능함)

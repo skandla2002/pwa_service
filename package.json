@@ -9,6 +9,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
     "express": "^4.17.1"
+  },
+  "dependencies": {
+    "react": "^17.0.1"
   }
 }
